@@ -6,8 +6,7 @@
 
 🌞 **`ping_simple.py`**
 
-//mettre le fichier ping_simple.py qui se trouve dans le dossier
-
+[ping_simple.py](ping_simple.py)
 
 
 ---
