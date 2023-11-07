@@ -23,8 +23,8 @@ while True:
         
         print(f"Données reçues du client : {data}")
 
-       
-        conn.sendall("Hi mate.")
+        message = "Hi mate."
+        conn.sendall(message.encode())
 
     except socket.error:
         print("Error Occured.")
