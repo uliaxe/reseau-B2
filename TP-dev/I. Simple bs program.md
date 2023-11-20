@@ -26,8 +26,11 @@ Received b'Hi mate.'
 🌞 **Commandes...**
 
 dnf install python git
+
 sudo firewall-cmd --add-port=13337/tcp --permanent
+
 sudo firewall-cmd --reload
+
 sudo ss -tnlp | grep 13337
 
 ## 2. User friendly
