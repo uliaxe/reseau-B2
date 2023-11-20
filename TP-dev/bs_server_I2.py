@@ -9,7 +9,7 @@ s.bind((host, port))
 s.listen(5)
 print(f"Serveur en écoute sur le port {host}{port}")
 
-while true :
+while True :
     
     client_socket, client_address = s.accept()
     print(f"Un client vient de se connecter et son IP c'est {client_address[0]}.")
