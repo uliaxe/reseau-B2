@@ -11,3 +11,9 @@
 ## A. Logs serveur
 
 🌞 **`bs_server_II2A.py`**
+
+```bash 
+[uliaxe@server TP-dev]$ sudo mkdir -p /var/log/bs_server
+```
+
+[bs_server_II2A.py](bs_server_II2A.py)
