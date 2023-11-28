@@ -4,7 +4,7 @@
 
 🌞 **`bs_server_I1.py`**
 
-[bs_server_I1.py](bs_python_I1.py)
+[bs_server_I1.py](python/bs_python_I1.py)
 
 ```bash
 [uliaxe@server TP-dev]$ python bs_server_I1.py
@@ -14,7 +14,7 @@ Données reçues du client : b'Meooooo !'
 
 🌞 **`bs_client_I1.py`**
 
-[bs_client_I1.py](bs_client_I1.py)
+[bs_client_I1.py](python/bs_client_I1.py)
 
 ```bash
 [uliaxe@client TP-dev]$ python bs_client_I1.py
@@ -35,14 +35,14 @@ sudo ss -tnlp | grep 13337
 
 🌞 **`bs_client_I2.py`**
 
-[bs_client_I2.py](bs_client_I2.py)
+[bs_client_I2.py](python/bs_client_I2.py)
 
 🌞 **`bs_server_I2.py`**
 
-[bs_server_I2.py](bs_server_I2.py)
+[bs_server_I2.py](python/bs_server_I2.py)
 
 ## 3. You say client I hear control
 
 🌞 **`bs_client_I3.py`**
 
-[bs_client_I3.py](bs_client_I3.py)
+[bs_client_I3.py](python/bs_client_I3.py)
