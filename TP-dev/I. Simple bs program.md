@@ -4,7 +4,7 @@
 
 🌞 **`bs_server_I1.py`**
 
-[bs_server_I1.py](python/bs_python_I1.py)
+[bs_server_I1.py](python/bs_server_I1.py)
 
 ```bash
 [uliaxe@server TP-dev]$ python bs_server_I1.py
