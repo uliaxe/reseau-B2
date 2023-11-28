@@ -8,4 +8,4 @@ jouez avec l'encodage et les sockets avant de passer à la suite
 faites un client qui envoie un grand nombre "100000" par exemple à un serveur
 interdiction d'utiliser encode() avant d'envoyer sur le réseau : traitez le nombre comme un entier, pas une string !
 
-[## II. Opti calculatrice]()
+[## II. Opti calculatrice](https://github.com/uliaxe/reseau-B2/blob/main/TP-dev/II.%20Opti%20calculatrice.md)
