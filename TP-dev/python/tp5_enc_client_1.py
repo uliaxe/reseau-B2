@@ -10,7 +10,7 @@ def valid_expression(expr):
 def send_message(s, msg):
     # Encode le message et envoie sur le réseau avec une séquence de fin
     encoded_msg = msg.encode('utf-8')
-    msg_length = len(encoded_msg)
+    msg_length = len(encoded_msg) + len(b'<clafin>')
     header = msg_length.to_bytes(4, byteorder='big')
     payload = header + encoded_msg + b'<clafin>'
     s.send(payload)
