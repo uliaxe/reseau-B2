@@ -32,10 +32,11 @@ def rec_msg(client_socket):
 
     # Vérifie que le message se termine bien par la séquence de fin
     if not message_received.endswith('<clafin>'):
-        raise RuntimeError('Invalid message format')
+        raise RuntimeError(f'Invalid message format. Received: {message_received}')
 
     # Retourne le message sans la séquence de fin
     return message_received[:-7]
+
 
 # Crée un socket, lie à l'adresse et au port spécifiés, puis écoute
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
