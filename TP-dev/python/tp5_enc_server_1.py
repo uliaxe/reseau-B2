@@ -35,7 +35,7 @@ def rec_msg(client_socket):
         raise RuntimeError(f'Invalid message format. Received: {message_received}')
 
     # Retourne le message sans la séquence de fin
-    return message_received[:-7]
+    return message_received[:-len('<clafin>')]
 
 
 # Crée un socket, lie à l'adresse et au port spécifiés, puis écoute
