@@ -28,5 +28,38 @@ def rec_msg (client_socket):
         #ajoute le morceau à la liste
         bytes_recd += len(chunk)
         
-        #assemble    
+      
+        # Ajoute la quantité d'octets reçus au compteur
+        bytes_received += len(chunk)
+
+    # Assemble la liste en un seul message
+    message_received = b"".join(chunks).decode('utf-8')
+
+    # Vérifie que le message se termine bien par la séquence de fin
+    if not message_received.endswith('<clafin>'):
+        raise RuntimeError('Invalid message format')
+
+    # Retourne le message sans la séquence de fin
+    return message_received[:-7]
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.bind(('127.0.0.1', 9999))
+sock.listen()
+client, client_addr = sock.accept()
+
+while True:
+    try:
+        # Attend la réception des messages du client
+        received_message = rec_msg(client)
+        if received_message is None:
+            break
+
+        print(f"Received from client: {received_message}")
+
+    except RuntimeError as e:
+        print(f"Error: {e}")
+        break
+
+client.close()
+sock.close() 
     
