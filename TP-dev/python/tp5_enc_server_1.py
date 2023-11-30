@@ -1,34 +1,29 @@
 import socket
 
-def rec_msg (client_socket):
-    #lit l'en tete pour definir la taille du message
+def rec_msg(client_socket):
+    # Lit l'en-tête pour définir la taille du message
     header = client_socket.recv(4)
     if not header:
         return None
-    
-    #lit la valeur de la taille message depuis l'en tete
+
+    # Lit la valeur de la taille du message depuis l'en-tête
     msg_length = int.from_bytes(header, byteorder='big')
-    
+
     print(f"Reading {msg_length} bytes")
-    
-    #lit les octets suivants pour reconstruire le message
-    
+
+    # Lit les octets suivants pour reconstruire le message
     chunks = []
-    bytes_recd = 0
-    
-    while bytes_recd < msg_length:
-        #lit 1024 octets ou moins à la fois
-        chunk = client_socket.recv(min(msg_length - bytes_recd, 1024))
+    bytes_received = 0
+
+    while bytes_received < msg_length:
+        # Lit 1024 octets ou moins à la fois
+        chunk = client_socket.recv(min(msg_length - bytes_received, 1024))
         if not chunk:
             raise RuntimeError('Invalid chunk received')
-        
-        #ajouter le morceau à la liste
+
+        # Ajoute le morceau à la liste
         chunks.append(chunk)
-        
-        #ajoute le morceau à la liste
-        bytes_recd += len(chunk)
-        
-      
+
         # Ajoute la quantité d'octets reçus au compteur
         bytes_received += len(chunk)
 
@@ -42,9 +37,12 @@ def rec_msg (client_socket):
     # Retourne le message sans la séquence de fin
     return message_received[:-7]
 
+# Crée un socket, lie à l'adresse et au port spécifiés, puis écoute
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind(('10.1.2.15', 9999))
 sock.listen()
+
+# Attend une connexion du client
 client, client_addr = sock.accept()
 
 while True:
@@ -60,6 +58,6 @@ while True:
         print(f"Error: {e}")
         break
 
+# Ferme la connexion du client et le socket
 client.close()
-sock.close() 
-    
+sock.close()
