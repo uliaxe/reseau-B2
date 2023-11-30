@@ -43,7 +43,7 @@ def rec_msg (client_socket):
     return message_received[:-7]
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.bind(('10.1.2.11', 9999))
+sock.bind(('10.1.2.15', 9999))
 sock.listen()
 client, client_addr = sock.accept()
 
