@@ -1,5 +1,3 @@
-import socket
-
 def rec_msg(client_socket):
     # Lit l'en-tête pour définir la taille du message
     header = client_socket.recv(4)
@@ -32,32 +30,7 @@ def rec_msg(client_socket):
 
     # Vérifie que le message se termine bien par la séquence de fin
     if not message_received.endswith('<clafin>'):
-        raise RuntimeError('Invalid message format')
+        raise RuntimeError(f'Invalid message format. Received: {message_received}')
 
     # Retourne le message sans la séquence de fin
     return message_received[:-7]
-
-# Crée un socket, lie à l'adresse et au port spécifiés, puis écoute
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.bind(('10.1.2.15', 13337))
-sock.listen()
-
-# Attend une connexion du client
-client, client_addr = sock.accept()
-
-while True:
-    try:
-        # Attend la réception des messages du client
-        received_message = rec_msg(client)
-        if received_message is None:
-            break
-
-        print(f"Received from client: {received_message}")
-
-    except RuntimeError as e:
-        print(f"Error: {e}")
-        break
-
-# Ferme la connexion du client et le socket
-client.close()
-sock.close()
