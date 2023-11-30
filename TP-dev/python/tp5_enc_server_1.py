@@ -39,7 +39,7 @@ def rec_msg(client_socket):
 
 # Crée un socket, lie à l'adresse et au port spécifiés, puis écoute
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.bind(('10.1.2.15', 9999))
+sock.bind(('10.1.2.15', 13337))
 sock.listen()
 
 # Attend une connexion du client

@@ -16,7 +16,7 @@ def send_message(s , msg):
     s.send(payload)
     
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect(('10.1.2.15', 9999))
+s.connect(('10.1.2.15', 13337))
 
 #demande à l'utilisateur de saisir une expression arithmétique valide
 
