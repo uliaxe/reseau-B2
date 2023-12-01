@@ -1,16 +1,19 @@
 import http.client
 
 def simple_http_client():
-    # Adresse du serveur
-    server_address = "10.1.2.15"
+    # Adresse du serveur local
+    server_address = "localhost"
     port = 13337
+
+    # Saisie utilisateur du chemin GET
+    path = input("Entrez le chemin GET (par exemple, /index.html) : ").strip()
 
     # Création d'une connexion au serveur
     connection = http.client.HTTPConnection(server_address, port)
 
     try:
-        # Envoi d'une requête GET
-        connection.request("GET", "/")
+        # Envoi d'une requête GET avec le chemin spécifié
+        connection.request("GET", path)
 
         # Récupération de la réponse du serveur
         response = connection.getresponse()
