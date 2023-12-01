@@ -8,7 +8,7 @@ class ServHTTP(BaseHTTPRequestHandler):
         self.wfile.write(b'<h1>Hello je suis un serveur HTTP</h1>')
 
 def run():
-    port = 8000
+    port = 13337
     serv_address = ('', port)
     httpd = HTTPServer(serv_address, ServHTTP)
     print(f'Starting server on port {port}...')
