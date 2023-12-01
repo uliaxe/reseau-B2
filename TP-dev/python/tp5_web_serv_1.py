@@ -10,7 +10,7 @@ class ServHTTP(BaseHTTPRequestHandler):
 
 def run():
     port = 13337
-    serv_address = ('', port)
+    serv_address = ('10.1.2.15', port)
     print(f"Starting server on port {port}...")
     try:
         httpd = HTTPServer(serv_address, ServHTTP)
