@@ -38,3 +38,5 @@ RawContentLength  : 39
 ## 3. Délivrer des pages web
 
 🌞 **`tp5_web_serv_3.py`**
+
+[tp5_web_serv_3.py](python/tp5_web_serv_3.py)
