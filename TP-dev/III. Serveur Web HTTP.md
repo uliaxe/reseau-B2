@@ -40,3 +40,16 @@ RawContentLength  : 39
 🌞 **`tp5_web_serv_3.py`**
 
 [tp5_web_serv_3.py](python/tp5_web_serv_3.py)
+
+
+## 4. Quelques logs
+
+🌞 **`tp5_web_serv_4.py`**
+
+[tp5_web_serv_4.py](python/tp5_web_serv_4.py)
+
+## 5. File download
+
+🌞 **`tp5_web_serv_5.py`**
+
+
