@@ -1,7 +1,8 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 class ServHTTP(BaseHTTPRequestHandler):
-    def GET(self):
+    def do_GET(self):
+        print("Received GET request")
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
@@ -10,9 +11,12 @@ class ServHTTP(BaseHTTPRequestHandler):
 def run():
     port = 13337
     serv_address = ('', port)
-    httpd = HTTPServer(serv_address, ServHTTP)
-    print(f'Starting server on port {port}...')
-    httpd.serve_forever()
+    print(f"Starting server on port {port}...")
+    try:
+        httpd = HTTPServer(serv_address, ServHTTP)
+        httpd.serve_forever()
+    except Exception as e:
+        print(f"Error: {e}")
 
 if __name__ == '__main__':
     run()
