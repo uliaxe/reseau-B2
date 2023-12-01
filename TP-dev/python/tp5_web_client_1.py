@@ -2,7 +2,7 @@ import http.client
 
 def simple_http_client():
     # Adresse du serveur
-    server_address = "localhost"
+    server_address = "10.1.2.15"
     port = 13337
 
     # Création d'une connexion au serveur
