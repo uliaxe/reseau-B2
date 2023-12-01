@@ -9,4 +9,5 @@ faites un client qui envoie un grand nombre "100000" par exemple à un serveur
 interdiction d'utiliser encode() avant d'envoyer sur le réseau : traitez le nombre comme un entier, pas une string !
 
 [## II. Opti calculatrice](https://github.com/uliaxe/reseau-B2/blob/main/TP-dev/II.%20Opti%20calculatrice.md)
-[## III. Serveur Web HTTP]()
+
+[## III. Serveur Web HTTP](https://github.com/uliaxe/reseau-B2/blob/main/TP-dev/III.%20Serveur%20Web%20HTTP.md)
