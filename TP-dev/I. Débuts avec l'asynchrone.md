@@ -15,4 +15,4 @@
 
 🌞 **`web_sync.py`**
 
-[web_sync.py](python/web_syns.py)
+[web_sync.py](python/web_sync.py)
