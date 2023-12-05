@@ -13,6 +13,6 @@
 
 ## 2. Web Requests
 
-🌞 **`web_requests.py`**
+🌞 **`web_sync.py`**
 
-[web_requests.py](python/web_requests.py)
+[web_sync.py](python/web_syns.py)
