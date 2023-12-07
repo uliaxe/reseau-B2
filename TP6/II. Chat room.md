@@ -6,4 +6,10 @@
 
 ## 2. Première version
 
-🌞 chat_server_ii_2.py
+🌞 **`chat_server_ii_2.py`**
+
+[chat_server_ii_2.py](./python/chat_server_ii_2.py)
+
+🌞 **``chat_client_ii_2.py``**
+
+[chat_client_ii_2.py](./python/chat_client_ii_2.py)
