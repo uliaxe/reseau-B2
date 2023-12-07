@@ -23,7 +23,7 @@ Durée approximative des boucles en millisecondes :
 
 🌞 **`ping_arg.py`**
 
-[ping_arg.py](python/ping_arg.py)
+[ping_arg.py](./python/ping_arg.py)
 
 ```bash
 PS C:\Users\lukas\reseau-B2> python '.\TP-Dev\ping_arg.py' 8.8.8.8
@@ -42,7 +42,7 @@ Durée approximative des boucles en millisecondes :
 
 🌞 **`is_up.py`**
 
-[is_up.py](python/is_up.py)
+[is_up.py](./python/is_up.py)
 
 ```bash
 PS C:\Users\lukas\reseau-B2> python '.\TP-Dev\is_up.py' 8.8.8.8
@@ -55,7 +55,7 @@ DOWN !
 
 🌞 **`lookup.py`**
 
-[lookup.py](lookup.py)
+[lookup.py](./python/lookup.py)
 
 ```bash
 PS C:\Users\lukas\reseau-B2> python '.\TP-Dev\lookup.py'
@@ -68,7 +68,7 @@ PS C:\Users\lukas\reseau-B2>
 
 🌞 **`get_ip.py`**
 
-[get_ip.py](get_ip.py)
+[get_ip.py](./python/get_ip.py)
 
 ```bash
 PS C:\Users\lukas\reseau-B2> python '.\TP-Dev\get_ip.py'
@@ -79,7 +79,7 @@ Ton adresse IP c'est :10.33.76.171
 
 🌞 **`network.py`**
 
-[network.py](network.py)
+[network.py](python/network.py)
 
 ```bash
 PS C:\Users\lukas\reseau-B2> python '.\TP-Dev\network.py' lookup ynov.com
