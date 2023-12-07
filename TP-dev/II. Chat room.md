@@ -2,4 +2,4 @@
 
 ## 1. Intro
 
-![Yet another](./TP-dev/img/yet_another.jpg)
+![Yet another](./img/yet_another.jpg)
