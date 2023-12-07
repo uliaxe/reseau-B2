@@ -23,4 +23,8 @@
 
 🌞**`web_sync_multiple.py`**
 
+[web_sync_multiple.py](python/web_sync_multiple.py)
 
+🌞 web_async_multiple.py
+
+[web_async_multiple.py](python/web_async_multiple.py)
