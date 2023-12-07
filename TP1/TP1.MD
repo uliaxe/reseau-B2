@@ -1,16 +1,15 @@
 # TP1 : Maîtrise réseau du poste
 
 - [TP1 : Maîtrise réseau du poste](#tp1--maîtrise-réseau-du-poste)
-- [I. Basics](#i-basics)
-- [II. Go further](#ii-go-further)
-- [III. Le requin](#iii-le-requin)
+  - [I. Basics](#i-basics)
+  - [II. Go further](#ii-go-further)
+  - [III. Le requin](#iii-le-requin)
 
-# I. Basics
-
+## I. Basics
 
 ☀️ **Carte réseau WiFi**
 
-```
+```bash
 C:\Users\lukas>ipconfig /all
 
 Carte réseau sans fil Wi-Fi :
@@ -19,12 +18,12 @@ Carte réseau sans fil Wi-Fi :
    Adresse IPv4. . . . . . . . . . . . . .: 10.33.76.171
 ```
 
-  - en notation CIDR, par exemple `/20`
-  - ET en notation décimale, par exemple `255.255.240.0`
+- en notation CIDR, par exemple `/20`
+- ET en notation décimale, par exemple `255.255.240.0`
 
   ☀️ **Déso pas déso**
 
-  - l'adresse de réseau du LAN auquel vous êtes connectés en WiFi :  10.33.64.0
+- l'adresse de réseau du LAN auquel vous êtes connectés en WiFi :  10.33.64.0
 - l'adresse de broadcast : 10.33.79.255
 - le nombre d'adresses IP disponibles dans ce réseau : 4096
 
@@ -38,13 +37,12 @@ Carte réseau sans fil Wi-Fi :
 
 Déterminer...
 
-
-```
+```bash
 C:\Users\lukas>ipconfig /all
  Passerelle par défaut. . . . . . . . . : 10.33.79.254
 ```
 
-```
+```bash
 C:\Users\lukas>arp -a
 [...]
   10.33.79.254          7c-5a-1c-d3-d8-76     dynamique
@@ -54,14 +52,12 @@ C:\Users\lukas>arp -a
 
 ☀️ **Serveur DHCP et DNS**
 
-```
+```bash
 C:\Users\lukas>ipconfig /all
    Serveur DHCP . . . . . . . . . . . . . : 10.33.79.254
       Serveurs DNS. . .  . . . . . . . . . . : 8.8.8.8
                                        1.1.1.1
 ```
-
----
 
 ☀️ **Table de routage**
 
@@ -69,8 +65,8 @@ Déterminer...
 
 - dans votre table de routage, laquelle est la route par défaut
 
----
- ```
+ ```bash
+
  C:\Users\lukas>route print -4
  
 IPv4 Table de routage
@@ -80,22 +76,21 @@ Destination réseau    Masque réseau  Adr. passerelle   Adr. interface Métriqu
           0.0.0.0          0.0.0.0     10.33.79.254     10.33.76.171     30
  ```
 
-# II. Go further
+## II. Go further
 
 ☀️ **Hosts ?**
 
 - faites en sorte que pour votre PC, le nom `b2.hello.vous` corresponde à l'IP `1.1.1.1`
 
-```
+```bash
 C:\Windows\System32\drivers\etc> cat hosts
 
 1.1.1.1 b2.hello.vous
 ```
 
-
 - prouvez avec un `ping b2.hello.vous` que ça ping bien `1.1.1.1`
 
-```
+```bash
 C:\Users\lukas>ping b2.hello.vous
 
 Envoi d’une requête 'ping' sur b2.hello.vous [1.1.1.1] avec 32 octets de données :
@@ -115,7 +110,7 @@ Durée approximative des boucles en millisecondes :
 - l'adresse IP du serveur auquel vous êtes connectés pour regarder la vidéo
 - le port du serveur auquel vous êtes connectés
 
-```
+```bash
 C:\Users\lukas>nslookup youtube.com
 Serveur :   dns.google
 Address:  8.8.8.8
@@ -128,7 +123,7 @@ Addresses:  2a00:1450:4007:80c::200e
 
 - le port que votre PC a ouvert en local pour se connecter au port du serveur distant
 
-```
+```bash
 C:\Users\lukas>netstat -n
 
 Connexions actives
@@ -138,13 +133,13 @@ Connexions actives
 [...]
 ```
 
-
 ☀️ **Requêtes DNS**
 
 Déterminer...
 
 - à quelle adresse IP correspond le nom de domaine `www.ynov.com`
-```
+
+```bash
 C:\Users\lukas>nslookup wwww.ynov.com
 Serveur :   dns.google
 Address:  8.8.8.8
@@ -157,7 +152,7 @@ Aliases:  wwww.ynov.com
 
 - à quel nom de domaine correspond l'IP `174.43.238.89`
 
-```
+```bash
 C:\Users\lukas>nslookup 174.43.238.89
 Serveur :   dns.google
 Address:  8.8.8.8
@@ -172,7 +167,7 @@ Déterminer...
 
 - par combien de machines vos paquets passent quand vous essayez de joindre `www.ynov.com`
 
-```
+```bash
 C:\Users\lukas>tracert www.ynov.com
 
 Détermination de l’itinéraire vers www.ynov.com [172.67.74.226]
@@ -197,7 +192,7 @@ Déterminer...
 
 - l'adresse IP publique de la passerelle du réseau (le routeur d'YNOV donc si vous êtes dans les locaux d'YNOV quand vous faites le TP)
 
-```
+```bash
 195.7.117.146
 ```
 
@@ -207,7 +202,8 @@ Déterminer...
 Déterminer...
 
 - combien il y a de machines dans le LAN auquel vous êtes connectés
- ```
+  
+ ```bash
  
 C:\Users\lukas>arp -a |select-String "10.33"
 
@@ -223,18 +219,16 @@ Interface : 10.33.76.171 --- 0xf
   10.33.79.255          ff-ff-ff-ff-ff-ff     statique
  ```
 
-
-# III. Le requin
+## III. Le requin
 
 ☀️ **Capture ARP**
 
-[Lien vers capture ARP](./arp.pcap)
+[Lien vers capture ARP](./wireshark/arp.pcapng)
 
 ☀️ **Capture DNS**
 
-[Lien vers capture DNS](./dns.pcapng)
+[Lien vers capture DNS](./wireshark/dns.pcapng)
 
 ☀️ **Capture TCP**
 
-[Lien vers capture TCP](./tcp.pcapng)
-
+[Lien vers capture TCP](./wireshark/tcp.pcapng)
