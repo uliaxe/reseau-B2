@@ -24,3 +24,10 @@
 
 [chat_server_ii_3.py](./python/chat_server_ii_3.py)
 
+## 4. Un chat fonctionnel
+
+🌞 **`chat_server_ii_4.py`**
+
+[chat_server_ii_4.py](./python/chat_server_ii_4.py)
+
+## 5. Gérer des pseudos
