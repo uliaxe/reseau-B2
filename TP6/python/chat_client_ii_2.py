@@ -5,7 +5,7 @@ def main():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # Définir l'adresse et le port du serveur
-    server_address = ('10.1.2.20', 133337)
+    server_address = ('10.1.2.20', 13337)
 
     try:
         # Se connecter au serveur
