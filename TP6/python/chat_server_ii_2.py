@@ -23,7 +23,7 @@ async def handle_client(reader, writer):
 async def main():
     # Créer le serveur
     server = await asyncio.start_server(
-        handle_client, '10.1.2.20', 133337)
+        handle_client, '10.1.2.20', 13337)
 
     # Obtenir les informations d'adresse du serveur
     addr = server.sockets[0].getsockname()
