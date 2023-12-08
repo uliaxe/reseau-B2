@@ -26,12 +26,17 @@ async def handle_client(reader, writer):
             print(f"Message reçu de {addr}: {message}")
 
             # Envoyer le message à tous les clients
+            tasks = []
             for client_addr, client_data in CLIENTS.items():
                 if client_addr != addr:
                     ip, port = client_addr
-                    response = f"{addr[0]}:{addr[1]} a dit : {message}"
-                    client_data["w"].write(response.encode())
-                    await client_data["w"].drain()
+                    response = f"{ip}:{port} a dit : {message}"
+                    tasks.append(client_data["w"].write(response.encode()))
+
+            # Attendre que tous les messages soient envoyés
+            await asyncio.gather(*tasks)
+            for client_data in CLIENTS.values():
+                await client_data["w"].drain()
 
     except asyncio.CancelledError:
         pass
@@ -44,7 +49,7 @@ async def handle_client(reader, writer):
 
 async def main():
     server = await asyncio.start_server(
-        handle_client, '10.1.2.20', 13337)
+        handle_client, '127.0.0.1', 8888)
 
     addr = server.sockets[0].getsockname()
     print(f'Serveur en attente de connexions sur {addr}')
