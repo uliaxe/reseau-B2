@@ -37,7 +37,8 @@ async def main():
         pass
     finally:
         # Fermer la connexion après Ctrl+C
-        writer.close()
+        if not writer.is_closing():
+            writer.close()
 
 if __name__ == "__main__":
     asyncio.run(main())
