@@ -18,21 +18,27 @@ async def handle_client(reader, writer):
     CLIENTS[client_addr] = {"r": reader, "w": writer}
 
     try:
-        while True:
-            # Recevez le message du client
-            data = await reader.read(1024)
-            if not data:
-                break
-
-            message = data.decode()
-
-            # Diffuser le message à tous les clients
-            await broadcast_message(client_addr, message)
-
+        # Attendre les messages du client
+        await receive_messages(client_addr)
     finally:
         # Retirez le client de CLIENTS lorsqu'il se déconnecte
         del CLIENTS[client_addr]
         print(f"Client déconnecté: {client_addr}")
+
+async def receive_messages(sender_addr):
+    # Obtenez le reader du client
+    reader = CLIENTS[sender_addr]["r"]
+
+    while True:
+        # Recevez le message du client
+        data = await reader.read(1024)
+        if not data:
+            break
+
+        message = data.decode()
+
+        # Diffuser le message à tous les clients
+        await broadcast_message(sender_addr, message)
 
 async def broadcast_message(sender_addr, message):
     # Formatage du message pour la diffusion
