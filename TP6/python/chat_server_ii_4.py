@@ -29,7 +29,7 @@ async def handle_client(reader, writer):
             for client_addr, client_data in CLIENTS.items():
                 if client_addr != addr:
                     ip, port = client_addr
-                    response = f"{ip}:{port} a dit : {message}"
+                    response = f"{addr[0]}:{addr[1]} a dit : {message}"
                     client_data["w"].write(response.encode())
                     await client_data["w"].drain()
 
