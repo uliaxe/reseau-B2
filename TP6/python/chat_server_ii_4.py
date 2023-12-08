@@ -1,6 +1,6 @@
 import asyncio
 
-async def send_messages(reader, writer):
+async def send_messages(writer):
     while True:
         # Saisie utilisateur
         message = input("Entrez votre message (ou Ctrl+C pour quitter): ")
@@ -9,7 +9,7 @@ async def send_messages(reader, writer):
         writer.write(message.encode())
         await writer.drain()
 
-async def receive_messages(reader, writer):
+async def receive_messages(reader):
     while True:
         # Réception des messages du serveur
         data = await reader.read(1024)
@@ -29,8 +29,8 @@ async def main():
 
         # Exécuter les tâches en parallèle
         await asyncio.gather(
-            send_messages(reader, writer),
-            receive_messages(reader, writer)
+            send_messages(writer),
+            receive_messages(reader)
         )
 
     except KeyboardInterrupt:
