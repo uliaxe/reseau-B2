@@ -1,7 +1,7 @@
 import asyncio
 import sys
 
-async def send_messages(writer):
+async def send_messages(reader, writer):
     while True:
         # Saisie utilisateur
         message = input("Entrez votre message (ou Ctrl+C pour quitter): ")
@@ -10,7 +10,7 @@ async def send_messages(writer):
         writer.write(message.encode())
         await writer.drain()
 
-async def receive_messages(reader):
+async def receive_messages(reader, writer):
     while True:
         # Réception des messages du serveur
         data = await reader.read(1024)
@@ -24,19 +24,21 @@ async def main():
     # Définir l'adresse et le port du serveur
     server_address = ('10.1.2.20', 13337)
 
-    # Créer un socket TCP/IP
-    client_socket = asyncio.StreamReader()
-    client_writer = asyncio.StreamWriter(None, None, None, asyncio.get_running_loop())
+    try:
+        # Connexion au serveur
+        reader, writer = await asyncio.open_connection(*server_address)
 
-    # Connexion au serveur
-    await asyncio.gather(
-        asyncio.open_connection(*server_address, limit=2**16, ssl=False),
-        send_messages(client_writer),
-        receive_messages(client_socket)
-    )
+        # Exécuter les tâches en parallèle
+        await asyncio.gather(
+            send_messages(reader, writer),
+            receive_messages(reader, writer)
+        )
+
+    except KeyboardInterrupt:
+        pass
+    finally:
+        # Fermer la connexion après Ctrl+C
+        writer.close()
 
 if __name__ == "__main__":
-    try:
-        asyncio.run(main())
-    except KeyboardInterrupt:
-        sys.exit(0)
+    asyncio.run(main())
