@@ -1,27 +1,37 @@
 import asyncio
 
 async def handle_client(reader, writer):
-    client_address = writer.get_extra_info('peername')
-    print(f"Client connected from {client_address[0]}:{client_address[1]}")
+    # Obtenez les informations sur le client
+    client_addr = writer.get_extra_info('peername')
+    print(f"Client connecté: {client_addr}")
 
+    # Recevez le message du client
     data = await reader.read(1024)
     message = data.decode()
-    print(f"Received message from client: {message}")
 
-    response = f"Hello {client_address[0]}:{client_address[1]}"
+    # Affiche le message du client
+    print(f"Message du client ({client_addr}): {message}")
+
+    # Envoyer un message de salutation au client
+    response = f"Hello {client_addr[0]}:{client_addr[1]}"
     writer.write(response.encode())
     await writer.drain()
 
+    # Fermez la connexion
     writer.close()
 
-async def start_server():
+async def main():
+    # Créer le serveur
     server = await asyncio.start_server(
-        handle_client, '10.1.2.20', 13337)
+        handle_client, '10.1.2.20', 133337)
 
+    # Obtenir les informations d'adresse du serveur
     addr = server.sockets[0].getsockname()
-    print(f"Server listening on {addr[0]}:{addr[1]}")
+    print(f'Serveur en écoute sur {addr}')
 
     async with server:
+        # Attendre indéfiniment que le serveur soit fermé
         await server.serve_forever()
 
-asyncio.run(start_server())
+# Exécute le serveur
+asyncio.run(main())
