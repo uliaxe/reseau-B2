@@ -13,6 +13,9 @@ async def handle_client(reader, writer):
 
         print(f"Nouveau client connecté: {addr}")
 
+    else:
+        print(f"Client déjà connecté: {addr}")
+
     try:
         while True:
             data = await reader.read(100)
@@ -23,17 +26,12 @@ async def handle_client(reader, writer):
             print(f"Message reçu de {addr}: {message}")
 
             # Envoyer le message à tous les clients
-            tasks = []
             for client_addr, client_data in CLIENTS.items():
                 if client_addr != addr:
                     ip, port = client_addr
                     response = f"{ip}:{port} a dit : {message}"
-                    tasks.append(client_data["w"].write(response.encode()))
-
-            # Attendre que tous les messages soient envoyés
-            await asyncio.gather(*tasks)
-            for client_data in CLIENTS.values():
-                await client_data["w"].drain()
+                    client_data["w"].write(response.encode())
+                    await client_data["w"].drain()
 
     except asyncio.CancelledError:
         pass
