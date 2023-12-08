@@ -41,7 +41,7 @@ async def handle_client(reader, writer):
 
 async def main():
     server = await asyncio.start_server(
-        handle_client, '127.0.0.1', 8888)
+        handle_client, '10.1.2.20', 13337)
 
     addr = server.sockets[0].getsockname()
     print(f'Serveur en attente de connexions sur {addr}')
