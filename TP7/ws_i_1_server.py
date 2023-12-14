@@ -1,5 +1,5 @@
 import asyncio
-import websockets
+from websockets import serve
 
 async def handle_client(websocket, path):
     while True:
@@ -15,7 +15,7 @@ async def handle_client(websocket, path):
         # Envoyer la réponse au client
         await websocket.send(server_response)
 
-start_server = websockets.serve(handle_client, "10.1.2.20", 13337)
+start_server = serve(handle_client, "10.1.2.20", 13337)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
