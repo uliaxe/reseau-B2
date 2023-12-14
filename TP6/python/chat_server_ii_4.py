@@ -40,18 +40,19 @@ async def handle_client(reader, writer):
         await writer.wait_closed()
 
 async def broadcast_message(sender_addr, message):
+    # Construction du message à envoyer à tous les clients
+    msg_to_send = f"{sender_addr[0]}:{sender_addr[1]} said: {message}"
+    
     # Parcours du dictionnaire CLIENTS
     for addr, client_info in CLIENTS.items():
         if addr != sender_addr:
-            # Construction du message à envoyer à tous les clients
-            msg_to_send = f"{sender_addr[0]}:{sender_addr[1]} said: {message}"
-            
-            # Envoi du message au client
             try:
+                # Envoi du message au client
                 client_info["w"].write(msg_to_send.encode())
                 await client_info["w"].drain()
             except asyncio.CancelledError:
                 pass
+
 
 async def main():
     server = await asyncio.start_server(handle_client, '10.1.2.20', 13337)
