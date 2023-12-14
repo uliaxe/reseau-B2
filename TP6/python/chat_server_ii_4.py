@@ -7,12 +7,12 @@ CLIENTS = {}
 async def handle_client(reader, writer):
     # Récupération de l'adresse IP et du port du client
     addr = writer.get_extra_info('peername')
-    
+
     # Vérification si le client est déjà connecté
     if addr in CLIENTS:
         print(f"Client {addr} is already connected.")
         return
-    
+
     # Stockage des informations du client dans le dictionnaire
     CLIENTS[addr] = {"r": reader, "w": writer}
     print(f"Client {addr} connected.")
@@ -22,14 +22,14 @@ async def handle_client(reader, writer):
             # Attente de la réception des données du client
             data = await reader.read(100)
             message = data.decode()
-            
+
             # Vérification si le client a fermé la connexion
             if not data:
                 break
-            
-            # Envoi du message à tous les clients connectés
+
+            # Envoi du message à tous les clients
             await broadcast_message(addr, message)
-            
+
     except asyncio.CancelledError:
         pass
     finally:
@@ -42,7 +42,7 @@ async def handle_client(reader, writer):
 async def broadcast_message(sender_addr, message):
     # Construction du message à envoyer à tous les clients
     msg_to_send = f"{sender_addr[0]}:{sender_addr[1]} said: {message}"
-    
+
     # Parcours du dictionnaire CLIENTS
     for addr, client_info in CLIENTS.items():
         if addr != sender_addr:
@@ -52,7 +52,6 @@ async def broadcast_message(sender_addr, message):
                 await client_info["w"].drain()
             except asyncio.CancelledError:
                 pass
-
 
 async def main():
     server = await asyncio.start_server(handle_client, '10.1.2.20', 13337)
