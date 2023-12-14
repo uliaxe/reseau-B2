@@ -37,8 +37,13 @@ async def main():
     except KeyboardInterrupt:
         pass
     finally:
-        # Fermer la connexion après Ctrl+C
-        writer.close()
+    # Fermer la connexion après Ctrl+C
+        if not writer.is_closing():
+            writer.write_eof()
+            await writer.drain()
+            writer.close()
+            await writer.wait_closed()
+
 
 if __name__ == "__main__":
     asyncio.run(main())
