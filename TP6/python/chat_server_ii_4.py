@@ -42,7 +42,9 @@ async def handle_client(reader, writer):
         await writer.wait_closed()
 
 async def broadcast_message(sender_addr, message):
-    msg_to_send = f"{sender_addr[0]}:{sender_addr[1]} said: {message}"
+    sender_ip, sender_port = sender_addr
+
+    msg_to_send = f"{sender_ip}:{sender_port} said: {message}"
 
     # Parcours du dictionnaire CLIENTS
     for addr, client_info in CLIENTS.items():
