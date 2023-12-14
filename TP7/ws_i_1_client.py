@@ -2,8 +2,8 @@ import asyncio
 import websockets
 
 async def user_input():
-    uri = "ws://localhost:8765"
-    
+    uri = "ws://10.1.2.20:13337"  # Mettez l'adresse IP et le port appropriés du serveur
+
     async with websockets.connect(uri) as websocket:
         while True:
             # L'utilisateur saisit une chaîne
