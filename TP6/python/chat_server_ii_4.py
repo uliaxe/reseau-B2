@@ -56,7 +56,7 @@ async def broadcast_message(sender_addr, message):
                 pass
 
 async def main():
-    server = await asyncio.start_server(handle_client, '127.0.0.1', 8888)
+    server = await asyncio.start_server(handle_client, '10.1.2.20', 13337)
 
     async with server:
         print("Server started. Listening for incoming connections...")
