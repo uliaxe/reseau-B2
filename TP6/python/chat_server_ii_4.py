@@ -1,61 +1,63 @@
 import asyncio
 
+# Déclaration du dictionnaire global
+global CLIENTS
 CLIENTS = {}
 
 async def handle_client(reader, writer):
-    addr = writer.get_extra_info('peername')  # Adresse du client (IP, port)
-
-    # Vérifier si le client est déjà dans la liste
-    if addr not in CLIENTS:
-        CLIENTS[addr] = {}
-        CLIENTS[addr]["r"] = reader
-        CLIENTS[addr]["w"] = writer
-
-        print(f"Nouveau client connecté: {addr}")
-
-    else:
-        print(f"Client déjà connecté: {addr}")
+    # Récupération de l'adresse IP et du port du client
+    addr = writer.get_extra_info('peername')
+    
+    # Vérification si le client est déjà connecté
+    if addr in CLIENTS:
+        print(f"Client {addr} is already connected.")
+        return
+    
+    # Stockage des informations du client dans le dictionnaire
+    CLIENTS[addr] = {"r": reader, "w": writer}
+    print(f"Client {addr} connected.")
 
     try:
         while True:
+            # Attente de la réception des données du client
             data = await reader.read(100)
+            message = data.decode()
+            
+            # Vérification si le client a fermé la connexion
             if not data:
                 break
-
-            message = data.decode()
-            print(f"Message reçu de {addr}: {message}")
-
-            # Envoyer le message à tous les clients
-            tasks = []
-            for client_addr, client_data in CLIENTS.items():
-                if client_addr != addr:
-                    ip, port = client_addr
-                    response = f"{ip}:{port} a dit : {message}"
-                    tasks.append(client_data["w"].write(response.encode()))
-
-            # Attendre que tous les messages soient envoyés
-            await asyncio.gather(*tasks)
-            for client_data in CLIENTS.values():
-                await client_data["w"].drain()
-
+            
+            # Envoi du message à tous les clients connectés
+            await broadcast_message(addr, message)
+            
     except asyncio.CancelledError:
         pass
     finally:
-        # Le client a été déconnecté
+        # Suppression des informations du client lorsqu'il se déconnecte
         del CLIENTS[addr]
-        print(f"Client déconnecté: {addr}")
+        print(f"Client {addr} disconnected.")
         writer.close()
         await writer.wait_closed()
 
-async def main():
-    server = await asyncio.start_server(
-        handle_client, '10.1.2.20', 13337)
+async def broadcast_message(sender_addr, message):
+    # Parcours du dictionnaire CLIENTS
+    for addr, client_info in CLIENTS.items():
+        if addr != sender_addr:
+            # Construction du message à envoyer à tous les clients
+            msg_to_send = f"{sender_addr[0]}:{sender_addr[1]} said: {message}"
+            
+            # Envoi du message au client
+            try:
+                client_info["w"].write(msg_to_send.encode())
+                await client_info["w"].drain()
+            except asyncio.CancelledError:
+                pass
 
-    addr = server.sockets[0].getsockname()
-    print(f'Serveur en attente de connexions sur {addr}')
+async def main():
+    server = await asyncio.start_server(handle_client, '10.1.2.20', 13337)
 
     async with server:
         await server.serve_forever()
 
-if __name__ == '__main__':
-    asyncio.run(main())
+# Lancement du serveur
+asyncio.run(main())
