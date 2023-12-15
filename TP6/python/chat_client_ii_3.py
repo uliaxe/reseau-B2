@@ -1,7 +1,7 @@
 import asyncio
 import aioconsole
 
-IP = "10.1.1.10"
+IP = ""
 PORT = 13337
 
 async def async_input(writer):
